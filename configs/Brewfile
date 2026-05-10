@@ -22,6 +22,8 @@ brew "mise"
 brew "ollama"
 brew "overmind"
 brew "pnpm"
+# PG version is pinned to avoid silent data-dir-breaking upgrades on major bumps.
+# When bumping, update the matching PATH entry in configs/zshrc.
 brew "postgresql@18"
 brew "redis"
 brew "ripgrep"

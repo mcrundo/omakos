@@ -103,6 +103,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Postgres
+# Keep this version in sync with the postgresql@N entry in configs/Brewfile.
 export PGGSSENCMODE="disable"
 export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 
