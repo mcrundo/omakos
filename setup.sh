@@ -46,6 +46,18 @@ chapter "Caching password…"
 ask_for_sudo
 
 ###############################################################################
+# PROMPT: User info
+###############################################################################
+# Each prompt is skipped if the corresponding env var is already set, so this
+# script can run non-interactively via:
+#   GIT_NAME=... GIT_EMAIL=... GITHUB_USER=... MAC_HOSTNAME=... ./setup.sh
+chapter "Gathering user info…"
+prompt_or_env GIT_NAME     "Git display name"
+prompt_or_env GIT_EMAIL    "Git email"
+prompt_or_env GITHUB_USER  "GitHub username"
+prompt_or_env MAC_HOSTNAME "Computer hostname (e.g. matts-work-mac)" "$(scutil --get LocalHostName 2>/dev/null || echo 'mac')"
+
+###############################################################################
 # INSTALL: Dependencies
 ###############################################################################
 chapter "Installing Dependencies…"
@@ -104,22 +116,10 @@ chapter "Setting up ZSH…"
 source ./scripts/zsh.sh
 
 ###############################################################################
-# SETUP: Cursor
+# SETUP: VS Code
 ###############################################################################
-chapter "Setting up Cursor…"
-source ./scripts/cursor.sh
-
-###############################################################################
-# SETUP: Neovim
-###############################################################################
-chapter "Setting up Neovim…"
-source ./scripts/nvim.sh
-
-###############################################################################
-# SETUP: Zed
-###############################################################################
-chapter "Setting up Zed…"
-source ./scripts/zed.sh
+chapter "Setting up VS Code…"
+source ./scripts/vscode.sh
 
 ###############################################################################
 # SETUP: Git
@@ -158,12 +158,6 @@ chapter "Setting up Zsh configuration…"
 source ./scripts/zshrc.sh
 
 ###############################################################################
-# SETUP: Ghostty
-###############################################################################
-chapter "Setting up Ghostty…"
-source ./scripts/ghostty.sh
-
-###############################################################################
 # SETUP: iTerm2
 ###############################################################################
 chapter "Setting up iTerm2…"
@@ -180,6 +174,12 @@ source ./scripts/mise.sh
 ###############################################################################
 chapter "Setting up Mac Settings…"
 source ./scripts/mac.sh
+
+###############################################################################
+# SETUP: Login Items
+###############################################################################
+chapter "Registering login items…"
+source ./scripts/login_items.sh
 
 ###############################################################################
 # SETUP: Complete

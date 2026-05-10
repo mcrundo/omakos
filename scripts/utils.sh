@@ -106,6 +106,28 @@ ask_for_sudo() {
 
 }
 
+prompt_or_env() {
+  # Usage: prompt_or_env VAR_NAME "Question text" [default]
+  # If VAR_NAME is already set in the environment, leave it alone.
+  # Otherwise, prompt the user (showing default in brackets if provided)
+  # and export the result.
+  local var=$1 question=$2 default=${3:-} value
+
+  if [ -n "${!var:-}" ]; then
+    print_success_muted "$var already set: ${!var}"
+    return 0
+  fi
+
+  if [ -n "$default" ]; then
+    read -p "  [?] $question [$default]: " value </dev/tty
+    value=${value:-$default}
+  else
+    read -p "  [?] $question: " value </dev/tty
+  fi
+
+  export "$var=$value"
+}
+
 ask() {
   # https://djm.me/ask
   local prompt default reply
