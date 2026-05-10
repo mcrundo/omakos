@@ -1,0 +1,7 @@
+{
+    "editor.tabSize": 2,
+    "workbench.colorTheme": "Night Owl Black (No Italics)",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose"
+}

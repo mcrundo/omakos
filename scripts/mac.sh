@@ -8,6 +8,15 @@ source ./scripts/utils.sh
 # Set macOS preferences
 step "Customizing macOS system preferences..."
 
+# Hostname
+if [ -n "${MAC_HOSTNAME:-}" ]; then
+  step "Setting computer hostname to '${MAC_HOSTNAME}'..."
+  sudo scutil --set ComputerName  "$MAC_HOSTNAME"
+  sudo scutil --set HostName      "$MAC_HOSTNAME"
+  sudo scutil --set LocalHostName "$MAC_HOSTNAME"
+  print_success_muted "Hostname configured"
+fi
+
 # Keyboard settings
 step "Setting faster keyboard repeat rates..."
 defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
