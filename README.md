@@ -117,7 +117,7 @@ All packages are managed through Homebrew and defined in
 
 ### Productivity & Communication
 
-- [Claude](https://claude.ai/), [ChatGPT](https://chat.openai.com/), [Codex](https://openai.com/codex/) for AI assistance
+- [Claude](https://claude.ai/), [ChatGPT](https://chat.openai.com/), [Codex](https://openai.com/codex/), [Gemini CLI](https://github.com/google-gemini/gemini-cli) for AI assistance
 - [Linear](https://linear.app/) for issue tracking
 - [Granola](https://www.granola.ai/) for AI meeting notes
 - [Slack](https://slack.com/) for team communication
