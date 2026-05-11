@@ -86,16 +86,15 @@ check_internet_connection() {
 ###############################################################################
 ask_for_sudo() {
 
-  # Ask for the administrator password upfront.
+  # Ask for the administrator password upfront. Do NOT redirect stderr here —
+  # sudo writes its "Password:" prompt to stderr, and silencing it means the
+  # user sees nothing to type into and the script hangs / fails.
+  sudo -v
 
-  sudo -v &>/dev/null
-
-  # Update existing `sudo` time stamp
-  # until this script has finished.
-  #
+  # Keep-alive: refresh the cached sudo timestamp every 60s until this script
+  # exits. Errors here (e.g. cache expired) are silenced because they only
+  # matter if a later sudo call fails, which will surface its own message.
   # https://gist.github.com/cowboy/3118588
-
-  # Keep-alive: update existing `sudo` time stamp until script has finished
   while true; do
     sudo -n true
     sleep 60
