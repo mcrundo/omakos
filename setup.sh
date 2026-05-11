@@ -51,10 +51,12 @@ ask_for_sudo
 # Each prompt is skipped if the corresponding env var is already set, so this
 # script can run non-interactively via:
 #   GIT_NAME=... GIT_EMAIL=... GITHUB_USER=... MAC_HOSTNAME=... ./setup.sh
+# Otherwise we offer existing values (git config, gh auth, scutil) as defaults
+# so re-runs become Enter-to-accept.
 chapter "Gathering user info…"
-prompt_or_env GIT_NAME     "Git display name"
-prompt_or_env GIT_EMAIL    "Git email"
-prompt_or_env GITHUB_USER  "GitHub username"
+prompt_or_env GIT_NAME     "Git display name" "$(git config --global user.name  2>/dev/null)"
+prompt_or_env GIT_EMAIL    "Git email"        "$(git config --global user.email 2>/dev/null)"
+prompt_or_env GITHUB_USER  "GitHub username"  "$(gh api user --jq .login        2>/dev/null)"
 prompt_or_env MAC_HOSTNAME "Computer hostname (e.g. matts-work-mac)" "$(scutil --get LocalHostName 2>/dev/null || echo 'mac')"
 
 ###############################################################################
