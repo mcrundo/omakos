@@ -65,23 +65,25 @@ prompt_or_env MAC_HOSTNAME "Computer hostname (e.g. matts-work-mac)" "$(scutil -
 chapter "Installing Dependencies…"
 
 # -----------------------------------------------------------------------------
-# XCode
+# XCode Command Line Tools
 # -----------------------------------------------------------------------------
-os=$(sw_vers -productVersion | awk -F. '{print $1 "." $2}')
-if softwareupdate --history | grep --silent "Command Line Tools.*${os}"; then
-  print_success_muted 'Command-line tools already installed. Skipping'
+# We use xcode-select --install rather than softwareupdate because the latter's
+# --list regex matching is fragile and frequently produces false positives
+# (reporting "already installed" when git/clang are missing). xcode-select
+# pops a GUI installer; the script polls until git becomes available.
+clt_path=$(xcode-select -p 2>/dev/null || true)
+if [ -n "$clt_path" ] && [ -x "$clt_path/usr/bin/git" ]; then
+  print_success_muted 'Command Line Tools already installed.'
 else
-  step 'Installing Command-line tools...'
-  in_progress=/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-  touch ${in_progress}
-  product=$(softwareupdate --list | awk "/\* Command Line.*${os}/ { sub(/^   \* /, \"\"); print }")
-  if ! softwareupdate --verbose --install "${product}"; then
-    echo 'Installation failed.' 1>&2
-    rm ${in_progress}
-    exit 1
-  fi
-  rm ${in_progress}
-  print_success 'Installation succeeded.'
+  step 'Installing Command Line Tools...'
+  print_warning 'A GUI dialog will appear shortly. Click "Install" and accept the license.'
+  xcode-select --install 2>/dev/null || true
+
+  print_muted 'Waiting for Command Line Tools install to complete (this can take 5-10 minutes)...'
+  while ! { clt_path=$(xcode-select -p 2>/dev/null) && [ -x "$clt_path/usr/bin/git" ]; }; do
+    sleep 10
+  done
+  print_success 'Command Line Tools installed.'
 fi
 
 # -----------------------------------------------------------------------------
