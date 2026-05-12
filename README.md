@@ -120,8 +120,10 @@ All packages are managed through Homebrew and defined in
 - [Claude](https://claude.ai/), [ChatGPT](https://chat.openai.com/), [Codex](https://openai.com/codex/), [Gemini CLI](https://github.com/google-gemini/gemini-cli) for AI assistance
 - [Linear](https://linear.app/) for issue tracking
 - [Granola](https://www.granola.ai/) for AI meeting notes
-- [Slack](https://slack.com/) for team communication
+- [Slack](https://slack.com/), [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) for team communication
 - [Zoom](https://zoom.us/) for video conferencing
+- [Microsoft Office](https://www.microsoft.com/microsoft-365) (Word, Excel, PowerPoint, Outlook, OneNote)
+- [Google Chrome](https://www.google.com/chrome/), [Microsoft Edge](https://www.microsoft.com/edge), [Firefox](https://www.mozilla.org/firefox/) for cross-browser testing
 - [Obsidian](https://obsidian.md/) for note-taking
 - [Raycast](https://www.raycast.com/) for productivity launcher
 - [Rectangle](https://rectangleapp.com/) for window management
@@ -129,7 +131,6 @@ All packages are managed through Homebrew and defined in
 - [Ice](https://github.com/jordanbaird/Ice) for menu-bar management
 - [Maccy](https://maccy.app/) for clipboard history
 - [Boop](https://boop.okat.best/) for text transformations
-- [Shottr](https://shottr.cc/) for screenshots
 - [Cog](https://cog.losno.co/) for audio playback
 - [SF Symbols](https://developer.apple.com/sf-symbols/) for Apple's symbol library
 
